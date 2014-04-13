@@ -1,0 +1,16 @@
+{
+  "name": "noted-router",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eduardo Sorribas <eduardo@sorribas.org> (http://sorribas.org/)",
+  "license": "MIT",
+  "dependencies": {
+    "seaport": "~2.0.2",
+    "http-proxy": "~1.1.1",
+    "param": "^0.3.2"
+  }
+}
