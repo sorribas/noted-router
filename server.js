@@ -9,11 +9,16 @@ var ports = seaport.createServer();
 ports.listen(param('seaport-port'));
 
 var server = http.createServer(function(req, res) {
-  var service = req.url.split('/')[1];
-  if (!service) service = 'app';
-  var ps = ports.query(service);
+  var urlArr = req.url.split('/');
+  urlArr.shift();
+  var part = urlArr.shift();
+  var ps = {length: false}, service = '';
+  do {
+    service += service ? ('/' + part) : part;
+    if (service) ps = ports.query(service);
+  } while (!ps.length && (part = urlArr.shift()));
 
-  if (ps.length === 0) ps = ports.query('app');
+  if (!ps.length) ps = ports.query('app');
   proxy.web(req, res, {target: ps[Math.floor(Math.random() * ps.length)]});
 });
 server.listen(param('port'), function() {
